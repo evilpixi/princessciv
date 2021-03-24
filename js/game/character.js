@@ -18,6 +18,8 @@ class Character extends Phaser.Physics.Arcade.Sprite {
         this.direction = 1
     }
 
+    static NULL = new Character({x:0, y:0, scene: game.scene.getScene("BootScene"), name: "NULL"})
+
     // movement
     walk(direction) {
         this.setVelocityX(direction * this.walkSpeed)
