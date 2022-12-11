@@ -16,11 +16,17 @@ class UIButton extends Phaser.GameObjects.Container {
             // do something
         }
         else {
-            this.btnRectOn = scene.add.rectangle(0, 0, this.width, this.height, 0xffaa44, 1)
-            this.btnRectOff = scene.add.rectangle(0, 0, this.width, this.height, 0xcc8822, 1)
+            this.btnRectOn = scene.add.rectangle(0, 0, this.width, this.height, 0x6b064d, 1)
+            this.btnRectOff = scene.add.rectangle(0, 0, this.width, this.height, 0x42032f, 1)
         }
         
-        this.btnText = scene.add.text(0, 0, text, config.textStyle || {color: "#000000"}).setOrigin(0.5)
+        let deaultTextStyle = {
+            strokeThickness: 1, 
+            strokeColor: "#ffffff",
+            fontSize: 20,
+            color: "#ffffff"
+        }
+        this.btnText = scene.add.text(0, 0, text, config.textStyle || deaultTextStyle).setOrigin(0.5)
             
         this.add(this.btnRectOff)
         this.add(this.btnRectOn)

@@ -1,7 +1,7 @@
 class GLOBAL {}
 
-GLOBAL.height = 720
-GLOBAL.width = 1280
+GLOBAL.width = 960
+GLOBAL.height = 528
 // --------------------- DEBUG TOOLS --------------------- 
 GLOBAL.debugMode = 1
 GLOBAL.dbg = {}
@@ -16,7 +16,7 @@ GLOBAL.gameConfig = {
     type: Phaser.CANVAS,
     scale: {
         parent: 'gameContainer',
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.NONE,//Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: GLOBAL.width,
         height: GLOBAL.height

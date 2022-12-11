@@ -9,9 +9,9 @@ class DebugScene extends Phaser.Scene
 
     create() 
     {
-        DEBUG.drawGrid(this, 50, 50)
+        DEBUG.drawGrid(this, 48, 48)
         this.bgGrid = this.add.container(0, 0)
-        this.add.text(GLOBAL.width/2, 10, "DEBUG SCENE", {color: "#ffffff", fontSize: 20, strokeThickness: 1}).setOrigin(0.5)
+        this.add.text(GLOBAL.width/2, 10, "DEBUG SCENE", {color: "#ffffff", fontSize: 30, strokeThickness: 1}).setOrigin(0.5)
 
         this.add.text(GLOBAL.width - 10, 10, GLOBAL.width + "x" + GLOBAL.height, {color: "#999999", align: "center"}).setOrigin(1, 0)
         this.topRightText = this.add.text(GLOBAL.width - 10, 30, "A", {color: "#999999", align: "center"}).setOrigin(1, 0)
@@ -20,13 +20,21 @@ class DebugScene extends Phaser.Scene
         })
 
         // --- SCENES ---
-        this.add.text(100, 30, "Scenes", {color: "#ffffff"}).setOrigin(0.5)
+        this.add.text(100, 30, "Scenes", {color: "#ffffff", fontSize: 24, strokeThickness: 1}).setOrigin(0.5)
 
         for (let i = 2; i < GLOBAL.game.scene.scenes.length; i++)
         {
             let currentScene = GLOBAL.game.scene.scenes[i]
             console.log(currentScene)
-            new UIButton(this, 100, 75 + 50*(i-2), currentScene.sys.config, ()=>{ this.scene.start(currentScene.sys.config) })
+            new UIButton(this, 
+                100, 
+                75 + 50*(i-2), 
+                currentScene.sys.config, 
+                ()=>{ this.scene.start(currentScene.sys.config)}, 
+                {
+                    textStyle: { strokeThickness: 1, fontSize: 20},
+                    width: 200
+                })
         }
 
         //this.debugButton1 = new UIButton(this, 100, 100, "deploy", ()=> {console.log("deployed")})
@@ -48,8 +56,8 @@ class DebugScene extends Phaser.Scene
             repeat: -1
         });
 
-        let female1 = this.add.sprite(50, 50, "female").setScale(4).setOrigin(0)
-        let male1 = this.add.sprite(50, 50, "male").setScale(4).setOrigin(0)
+        let female1 = this.add.sprite(50, 50, "female").setScale(2).setOrigin(0)
+        let male1 = this.add.sprite(50, 50, "male").setScale(2).setOrigin(0)
 
         let male2 = this.add.sprite(250, 50, "male").setScale(4).setOrigin(0)
         let female2 = this.add.sprite(250, 50, "female").setScale(4).setOrigin(0)
