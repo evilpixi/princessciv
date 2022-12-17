@@ -1,46 +1,81 @@
-class Character extends Phaser.Physics.Arcade.Sprite {
-    constructor(config) {
-        super(config.scene, config.x, config.y, config.name)
+class Character extends Phaser.GameObjects.Container {
+    constructor(scene, x, y, config) 
+    {
+        super(scene, x, y)
+        scene.add.existing(this)
         
-        this.scene = config.scene
-        this.scene.add.existing(this)
-        this.scene.physics.add.existing(this);
+        this.race = config.race
+        this.gender = config.gender
+        this.type = this.race + "-" + this.gender
+        this.sprites = {
+            body: scene.add.sprite(0, 0, "char-" + config.type)
+        }
+        
+        this.name = NamesTable[this.type][Math.floor(Math.random()*NamesTable.length)];
+        this.dirX = 0
+        this.dirY = 0
+        this.direction = "d"
+        this.status = "stand"
+        
+        this.playAnim(this.status, this.direction)
 
-        this.name = config.name
-        this.setCollideWorldBounds(true)
+        // add children
+        for (let spr in this.sprites)
+        {
+            this.add(this.sprites[spr])
+        }
 
-        // config variables
-        this.walkSpeed = 10
-        this.jumpSpeed = 10
+        this.currentTask = {}
+    }
 
-        // status
-        this.onAir = 1      
-        this.direction = 1
+    playAnim(animation, direction)
+    {
+        for (let part in this.sprites)
+        {
+            let spritePart = this.sprites[part]
+            console.log(spritePart)
+            let anim = ["ch", this.type, part, animation, direction].join("-")
+            if (GLOBAL.debugMode) console.log(anim)
+
+            spritePart.anims.play(anim)
+        }
     }
 
     // movement
+    setDirection(direction)
+    {
+
+    }
+
     walk(direction) {
-        this.setVelocityX(direction * this.walkSpeed)
+        this.setDirection(direction)
+        this.setVelocityX(direction * 100)
     }
 
-    moveLeft() {        
-        this.direction = -1
-        this.walk(-1)
-    }
-    moveRight() {        
-        this.direction = 1
-        this.walk(1)
-    }
     stand() {
-        this.walk(0)
+        
     }
 
-    jump() {     
-        if (this.onAir) return   
-        this.setVelocityY(-this.jumpSpeed)
+    executeTask() {
+        if (!this.task) return
+
+
     }
 
     update() {
-        
+        executeTask()
     }
+}
+
+let NamesTable = {
+    "human-fe" : ["Roberta", "Laura", "Cassandra", "Vayne", "Lila", "Wyslisa", "Colette"]
+}
+
+Character.RACES = {
+    HUMAN: "human"
+}
+
+Character.GENDERS = {
+    FEMALE: "fe",
+    MALE: "ma"
 }

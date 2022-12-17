@@ -1,7 +1,7 @@
 class GLOBAL {}
 
 GLOBAL.width = 960
-GLOBAL.height = 528
+GLOBAL.height = 540
 // --------------------- DEBUG TOOLS --------------------- 
 GLOBAL.debugMode = 1
 GLOBAL.dbg = {}
@@ -16,10 +16,11 @@ GLOBAL.gameConfig = {
     type: Phaser.CANVAS,
     scale: {
         parent: 'gameContainer',
-        mode: Phaser.Scale.NONE,//Phaser.Scale.FIT,
+        mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: GLOBAL.width,
-        height: GLOBAL.height
+        height: GLOBAL.height,
+        min: { width: GLOBAL.width, height: GLOBAL.height }
     },
     autoStart: false,
     physics: {
@@ -31,6 +32,12 @@ GLOBAL.gameConfig = {
     },
     render: {
         antialias: false
+    },
+    callbacks: {
+        postBoot: (game)=> {
+            game.scale.displaySize.setSnap(GLOBAL.width/3, GLOBAL.height/3)
+            game.scale.refresh()
+        }
     }
 }
 
